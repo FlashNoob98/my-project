@@ -4,15 +4,16 @@ import {StyleSheet, Text, View} from "react-native";
 import Square from './Square';
 
 const GameBoard = () => {
-  const [timeLeft, setTimeLeft] = useState(10)
+  let time = 10
+  const [timeLeft, setTimeLeft] = useState(time)
 
   useEffect(() => {
     if(!timeLeft) return
-    const timerID = setInterval(() => {
+    const timerId = setInterval(() => {
       // happens every second
       setTimeLeft(timeLeft -1)
     },1000)
-      return() => clearInterval(timerID)
+      return() => clearInterval(timerId)
   }, [timeLeft])
 
 
@@ -23,18 +24,18 @@ const GameBoard = () => {
           <StatusBar style="auto" />
           <Text>{timeLeft}</Text>
           <View style={styles.game}>
-            <Square></Square>
-            <Square></Square>
-            <Square></Square>
-            <Square></Square>
-            <Square></Square>
-            <Square></Square>
-            <Square></Square>
-            <Square></Square>
-            <Square></Square>
-            <Square></Square>
-            <Square></Square>
-            <Square></Square>
+            <Square time={time}></Square>
+            <Square time={time}></Square>
+            <Square time={time}></Square>
+            <Square time={time}></Square>
+            <Square time={time}></Square>
+            <Square time={time}></Square>
+            <Square time={time}></Square>
+            <Square time={time}></Square>
+            <Square time={time}></Square>
+            <Square time={time}></Square>
+            <Square time={time}></Square>
+            <Square time={time}></Square>
           </View>
         </View>
       );
