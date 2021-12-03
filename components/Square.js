@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { View, StyleSheet, Text } from 'react-native'
+import { View, StyleSheet, Text, TouchableOpacity } from 'react-native'
+import { addScore } from './../redux'
+import { connect } from 'react-redux'
 
-const Square=({time})=>{
+const Square=({time, props})=>{
     const [moleActive, setMoleActive] = useState(false)
     const [isGameOver, setGameOver] = useState(false)
 
@@ -22,9 +24,11 @@ const Square=({time})=>{
     }
 
     return (
-        <View style={moleActive? styles.mole : styles.square}>
-            {isGameOver && <Text>X</Text>}
-        </View>
+        <TouchableOpacity onPress={moleActive? props.addScore : null }>
+            <View style={moleActive? styles.mole : styles.square}>
+                {isGameOver && <Text>X</Text>}
+            </View>
+        </TouchableOpacity>
     )
 }
 
@@ -45,4 +49,17 @@ const styles = StyleSheet.create({
     }
 })
 
-export default Square
+const mapStateToProps= state => {
+    return {
+        score:state.score
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return{
+        addScore: () => dispatch(addScore())
+    }
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Square)
